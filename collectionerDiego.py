@@ -5,13 +5,18 @@ with open('input.txt') as file:
     min_values = list(map(int, file.readline().split()))
 
 diegos = set(diegos)
-ans = {}
+diegos = list(diegos)
+diegos.sort()
+
 for collector in min_values:
-    tmp = 0
-    if collector not in ans:
-        for mark in diegos:
-            if mark < collector:
-                tmp += 1
-        ans[collector] = tmp
-    tmp = ans[collector]
-    print(tmp)
+
+    l = 0
+    r = len(diegos)
+    while l != r:
+        m = (l + r) // 2
+        if diegos[m] >= collector:
+            r = m
+        else:
+            l = m + 1
+
+    print(l)
